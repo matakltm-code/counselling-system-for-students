@@ -1,6 +1,8 @@
 <?php
 
 use App\Http\Controllers\AccountController;
+use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\ChangePasswordController;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
 /*
@@ -19,6 +21,17 @@ Route::get('/', function () {
 });
 
 Auth::routes();
+
+// Profile route
+Route::get('/profile', [ProfileController::class, 'index']);
+Route::get('/profile/edit', [ProfileController::class, 'edit']);
+Route::patch('/profile/{profile}', [ProfileController::class, 'update']);
+Route::get('/profile/change-password', [ChangepasswordController::class, 'index']);
+Route::post('/profile/change-password', [ChangepasswordController::class, 'store']);
+// Aditional profile for conselor
+Route::get('/profile/edit/specialty', [ProfileController::class, 'edit_specialty']);
+Route::patch('/profile/{profile}/specialty', [ProfileController::class, 'update_specialty']);
+
 
 // Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 

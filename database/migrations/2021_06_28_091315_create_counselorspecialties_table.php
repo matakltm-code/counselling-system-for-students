@@ -16,7 +16,9 @@ class CreateCounselorspecialtiesTable extends Migration
         Schema::create('counselorspecialties', function (Blueprint $table) {
             $table->id();
             $table->integer('user_id');
-            $table->text('specialty_detail');
+            // $table->text('specialty_title');
+            $table->string('title');
+            $table->text('detail');
             $table->timestamps();
         });
     }

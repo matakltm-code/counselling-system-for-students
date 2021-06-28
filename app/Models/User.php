@@ -59,6 +59,18 @@ class User extends Authenticatable
         return auth()->user()->user_type == 'student';
     }
 
+    public function sex_type_text($sex_type)
+    {
+        $result = '';
+        if ($sex_type == 'M') {
+            $result = 'Male';
+        }
+        if ($sex_type == 'F') {
+            $result = 'Female';
+        }
+
+        return $result;
+    }
     public function account_type_text($user_type)
     {
         $result = '';
@@ -73,5 +85,18 @@ class User extends Authenticatable
         }
 
         return $result;
+    }
+
+
+    // Relation
+    /**
+     * Get the user associated with the User
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\HasOne
+     */
+    public function specialty()
+    {
+        return $this->hasOne(Counselorspecialty::class);
+        // return $this->hasOne(Counselorspecialty::class, 'foreign_key', 'local_key');
     }
 }

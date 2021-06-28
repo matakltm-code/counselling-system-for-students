@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Counselorspecialty;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
@@ -51,7 +52,7 @@ class AccountController extends Controller
             'password' => ['required', 'string', 'min:4', 'confirmed'],
         ]);
         // dd($data);
-        User::create([
+        $user = User::create([
             'fname' => $data['fname'],
             'lname' => $data['lname'],
             'sex' => $data['sex'],
@@ -62,6 +63,16 @@ class AccountController extends Controller
             'password' => Hash::make($data['password']),
             'last_login_at' => Carbon::now()->toDateTimeString()
         ]);
+
+        // Create a specialty table row for the user if it is a counselor
+        if ($data['user_type'] == 'counselor') {
+            Counselorspecialty::create([
+                'user_id' => $user->id,
+                'title' => '',
+                'detail' => ''
+            ]);
+        }
+
         return redirect('/account')->with('success', 'Account created successfuly!');
     }
 

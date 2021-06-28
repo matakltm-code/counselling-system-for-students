@@ -16,6 +16,7 @@
                                 <th scope="col">#</th>
                                 <th scope="col">First Name</th>
                                 <th scope="col">Last Name</th>
+                                <th scope="col">Username</th>
                                 <th scope="col">Email</th>
                                 <th scope="col">Account Type</th>
                                 <th scope="col">Created</th>
@@ -33,6 +34,7 @@
                                 <th scope="row">{{ $loop->iteration }}</th>
                                 <td class="text-capitalize">{{ $user->fname }}</td>
                                 <td class="text-capitalize">{{ $user->lname }}</td>
+                                <td>{{ $user->username }}</td>
                                 <td>{{ $user->email }}</td>
                                 <td>{{ $user->account_type_text($user->user_type) }}</td>
                                 <td>{{ $user->created_at->diffForHumans() }}</td>
@@ -62,6 +64,7 @@
                                 <th scope="row">{{ $loop->iteration }}</th>
                                 <td class="text-capitalize">{{ $user->fname }}</td>
                                 <td class="text-capitalize">{{ $user->lname }}</td>
+                                <td>{{ $user->username }}</td>
                                 <td>{{ $user->email }}</td>
                                 <td>{{ $user->account_type_text($user->user_type) }}</td>
                                 <td>{{ $user->created_at->diffForHumans() }}</td>
@@ -91,7 +94,7 @@
 
                             @else
                             <tr>
-                                <th colspan="8">There is no any user added</th>
+                                <th colspan="9">There is no any user added</th>
                             </tr>
                             @endif
 
