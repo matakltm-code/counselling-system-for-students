@@ -5,10 +5,10 @@
     <div class="row justify-content-center">
         <div class="col-md-8">
             <div class="card">
-                <div class="card-header">{{ __('Register') }}</div>
+                <div class="card-header">{{ __('Create new user account') }}</div>
 
                 <div class="card-body">
-                    <form method="POST" action="{{ route('register') }}">
+                    <form method="POST" action="/account">
                         @csrf
 
                         <div class="form-group row">
@@ -133,10 +133,36 @@
                             </div>
                         </div>
 
+                        <div class="form-group row">
+                            <label for="user_type"
+                                class="col-md-4 col-form-label text-md-right">{{ __('Account Type') }}</label>
+
+                            <div class="col-md-6">
+                                <select id="user_type" name="user_type"
+                                    class="form-control @error('user_type') is-invalid @enderror" name="user_type">
+                                    {{-- // student, counselor, admin --}}
+                                    <option value="admin" @if (old('user_type')=='admin' ) selected="selected" @endif>
+                                        Admin</option>
+                                    <option value="counselor" @if (old('user_type')=='counselor' ) selected="selected"
+                                        @endif>Counselor</option>
+                                    @if (env('ADMIN_CAN_CREATE_STUDENT_ACCOUNT'))
+                                    <option value="student" @if (old('user_type')=='student' ) selected="selected"
+                                        @endif>Student</option>
+                                    @endif
+                                </select>
+
+                                @error('user_type')
+                                <span class="invalid-feedback" role="alert">
+                                    <strong>{{ $message }}</strong>
+                                </span>
+                                @enderror
+                            </div>
+                        </div>
+
                         <div class="form-group row mb-0">
                             <div class="col-md-6 offset-md-4">
                                 <button type="submit" class="btn btn-primary">
-                                    {{ __('Register') }}
+                                    {{ __('Create Account') }}
                                 </button>
                             </div>
                         </div>

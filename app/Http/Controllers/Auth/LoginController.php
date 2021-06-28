@@ -57,11 +57,11 @@ class LoginController extends Controller
 
         $fieldType = filter_var($request->username, FILTER_VALIDATE_EMAIL) ? 'email' : 'username';
 
-        if (Auth::attempt(array($fieldType => $input['username'], 'password' => $input['password']))) {
+        if (Auth::attempt(array($fieldType => $input['username'], 'password' => $input['password'], 'active_account' => 1), $request->filled('remember'))) {
             return redirect('/');
         } else {
             return redirect()->route('login')
-                ->with('error', 'Incorrect Email Address and Password.');
+                ->with('error', 'Incorrect Email Address or Password. <br/> Please check your account is active.');
         }
     }
 }

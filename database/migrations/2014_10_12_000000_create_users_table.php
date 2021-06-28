@@ -27,6 +27,9 @@ class CreateUsersTable extends Migration
             $table->string('email')->unique();
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
+            $table->boolean('active_account')->default(true);
+            $table->timestamp('last_login_at')->nullable(); // C:\xampp\htdocs\uog-thesis-projects\hotel-management\vendor\laravel\ui\auth-backend\AuthenticatesUsers.php
+
             $table->rememberToken();
             $table->timestamps();
         });

@@ -9,6 +9,8 @@ use Illuminate\Foundation\Auth\RegistersUsers;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
 
+use Carbon\Carbon;
+
 class RegisterController extends Controller
 {
     /*
@@ -52,8 +54,8 @@ class RegisterController extends Controller
         return Validator::make($data, [
             'fname' => ['required', 'string', 'max:255'],
             'lname' => ['required', 'string', 'max:255'],
-            'sex' => ['required', 'string', 'max:1'],
-            'phone' => ['required', 'string', 'max:15'],
+            'sex' => ['required', 'max:1'],
+            'phone' => ['required', 'max:15'],
             'username' => ['required', 'string', 'max:255', 'unique:users'],
             'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
             'password' => ['required', 'string', 'min:4', 'confirmed'],
@@ -77,6 +79,7 @@ class RegisterController extends Controller
             'username' => $data['username'],
             'email' => $data['email'],
             'password' => Hash::make($data['password']),
+            'last_login_at' => Carbon::now()->toDateTimeString()
         ]);
     }
 }
