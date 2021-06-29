@@ -66,11 +66,20 @@
                             <a class="nav-link" href="/account/login-history">{{ __('Login History') }}</a>
                         </li>
                         @elseif (auth()->user()->is_counselor)
+                        <li class="nav-item <?=(Route::current()->uri() == 'counselling-requests' ? 'active':'')?>">
+                            <a class="nav-link" href="/counselling-requests">{{ __('Counselling Requests') }}</a>
+                        </li>
                         @elseif (auth()->user()->is_student)
+                        <li class="nav-item <?=(Route::current()->uri() == 'appointments' ? 'active':'')?>">
+                            <a class="nav-link" href="/appointments">{{ __('Appointments') }}</a>
+                        </li>
+                        <li class="nav-item <?=(Route::current()->uri() == 'counselors' ? 'active':'')?>">
+                            <a class="nav-link" href="/counselors">{{ __('Counselors') }}</a>
+                        </li>
                         @endif
                         <li class="nav-item dropdown">
-                            <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button"
-                                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
+                            <a id="navbarDropdown" class="nav-link dropdown-toggle text-capitalize" href="#"
+                                role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
                                 {{ Auth::user()->fname . ' ' . Auth::user()->lname }}
                             </a>
 

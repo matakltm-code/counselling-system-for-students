@@ -99,4 +99,25 @@ class User extends Authenticatable
         return $this->hasOne(Counselorspecialty::class);
         // return $this->hasOne(Counselorspecialty::class, 'foreign_key', 'local_key');
     }
+
+
+    /**
+     * Get all of the appointments for student User
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function student_appointments()
+    {
+        return $this->hasMany(Appointment::class, 'student_id', 'id');
+    }
+
+    /**
+     * Get all of the appointments for Counselor User
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function counselor_appointments()
+    {
+        return $this->hasMany(Appointment::class, 'counselor_id', 'id');
+    }
 }

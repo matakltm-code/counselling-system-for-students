@@ -3,10 +3,13 @@
 namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
+use App\Models\User;
 use App\Providers\RouteServiceProvider;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+
+use Carbon\Carbon;
 
 class LoginController extends Controller
 {
@@ -58,6 +61,11 @@ class LoginController extends Controller
         $fieldType = filter_var($request->username, FILTER_VALIDATE_EMAIL) ? 'email' : 'username';
 
         if (Auth::attempt(array($fieldType => $input['username'], 'password' => $input['password'], 'active_account' => 1), $request->filled('remember'))) {
+            // After login update user last login
+            $user_id = auth()->user()->id;
+            User::where('id', $user_id)->update([
+                'last_login_at' => Carbon::now()->toDateTimeString()
+            ]);
             return redirect('/');
         } else {
             return redirect()->route('login')
