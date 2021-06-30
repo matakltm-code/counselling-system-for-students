@@ -20,8 +20,12 @@
                         <div class="col-md-6">
                             <small>Counselor Specialty</small>
                             <p class="b">
-                                <span
-                                    class="font-weight-bold">{{ $appointment->counselor->specialty->title ?? '-' }}</span>
+                                @if (!empty($appointment->counselor->specialty->title))
+                                <span class="font-weight-bold">{{ $appointment->counselor->specialty->title }}</span>
+                                @else
+                                <span class="font-weight-bold text-danger">This user counselor specialty is not stated
+                                    yet!</span>
+                                @endif
                             </p>
                             <small>Your Reason</small>
                             <p class="b">
@@ -36,7 +40,18 @@
                             <p class="pb-0 mb-0">Request sent
                                 {{ $appointment->created_at->diffForHumans() }}</p>
                         </div>
-                        <div class="col-md-6 bg-white text-dark pt-2">
+                        <div class="col-md-6 bg-white text-dark pt-2 pb-1">
+                            <p>
+                                <button class="btn btn-link btn-sm" type="button" data-toggle="collapse"
+                                    data-target="#collapseCounselorNote" aria-expanded="false"
+                                    aria-controls="collapseCounselorNote">
+                                    {{ $appointment->counselor->fname }}'s Note
+                                </button>
+                            </p>
+                            <div class="collapse" id="collapseCounselorNote">
+                                {!! $appointment->counselor_note !!}
+                            </div>
+
                             <p class="b">Metting Id: <strong>{{$appointment->metting_id }}</strong></p>
                             <p class="b">Metting Passcode: <strong>{{$appointment->metting_passcode }}</strong></p>
                             <p class="b">Metting Time:
@@ -53,7 +68,12 @@
                     @else
                     <small>Counselor Specialty</small>
                     <p class="b">
-                        <span class="font-weight-bold">{{ $appointment->counselor->specialty->title ?? '-' }}</span>
+                        @if (!empty($appointment->counselor->specialty->title))
+                        <span class="font-weight-bold">{{ $appointment->counselor->specialty->title }}</span>
+                        @else
+                        <span class="font-weight-bold text-danger">This user counselor specialty is not stated
+                            yet!</span>
+                        @endif
                     </p>
                     <small>Your Reason</small>
                     <p class="b">
@@ -76,7 +96,10 @@
             </div>
             @else
             <div class="alert alert-danger" role="alert">
-                <p>There is no any appointments yet!</p>
+                <p class="pt-2 font-weight-bold">There is no any appointments yet!</p>
+                <p class="lead">To add new appointment first send a <a href="/counselors"
+                        class="btn btn-link btn-sm">Counselor
+                        Request</a></p>
             </div>
             @endif
         </div>

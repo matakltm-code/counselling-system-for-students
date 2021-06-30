@@ -84,8 +84,8 @@ class ProfileController extends Controller
         // ProfileController::checkIfItsMe($user->id);
 
         $data = request()->validate([
-            'title' => ['required', 'string'],
-            'detail' => ['required'],
+            'title' => ['required', 'string', 'min:5'],
+            'detail' => ['required', 'min:15'],
         ]);
         // dd($data);
         // User::where('id', auth()->user()->id)->update($data);

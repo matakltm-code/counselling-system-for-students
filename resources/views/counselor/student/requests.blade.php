@@ -22,11 +22,13 @@
                         </div>
 
                         <div class="col-md-6 d-flex justify-content-between">
+                            @if ($appointment->request_status != 'accepted')
                             <form action="/counselling-requests" method="post">
                                 @csrf
                                 <input type="hidden" name="appointment_id" value="{{ $appointment->id }}">
                                 <button name="submit" type="submit" class="btn btn-danger btn-sm">Refuse</button>
                             </form>
+                            @endif
                             <div>
                                 <a href="/counselling-requests/{{ $appointment->id }}" class="btn btn-info btn-sm">Show
                                     detail</a>
@@ -54,8 +56,14 @@
                 {{ $requests->links() }}
             </div>
             @else
+            @if (empty(auth()->user->specialty->detail))
+            <div class="alert alert-danger text-center" role="alert">
+                <p class="display-4">Please finsh your counsellig specialty profile <br> <a
+                        href="/profile/edit/specialty" class="btn btn-sm btn-link">Click Here</a></p>
+            </div>
+            @endif
             <div class="alert alert-danger" role="alert">
-                <p>There is no any requests yet!</p>
+                <p class="pt-2 font-weight-bold">There is no any requests yet!</p>
             </div>
             @endif
         </div>

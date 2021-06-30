@@ -17,7 +17,7 @@
                     </div>
                     <div class="row">
                         <div class="col-md-12">
-                            <form method="post" action="/profile/{{ $user->id }}/specialty">
+                            <form method="POST" action="/profile/{{ $user->id }}/specialty">
                                 @csrf
                                 @method('PATCH')
                                 <div class="form-group row">
@@ -38,15 +38,16 @@
                                 <div class="form-group row">
                                     <label for="editor" class="col-12 col-form-label">Specialty detail
                                         description</label>
+
                                     <div class="col-12">
-                                        <textarea name="detail" class="editor" rows="10"
+                                        <textarea name="detail" class="editor" id="editor"
                                             value="{!! old('detail') ?? $user->specialty->detail !!}"></textarea>
+                                        @error('detail')
+                                        <span class="invalid-feedback" role="alert">
+                                            <strong>{{ $message }}</strong>
+                                        </span>
+                                        @enderror
                                     </div>
-                                    @error('detail')
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
-                                    @enderror
                                 </div>
 
 

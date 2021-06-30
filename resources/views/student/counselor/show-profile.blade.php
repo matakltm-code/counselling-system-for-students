@@ -25,8 +25,14 @@
                 <div class="card-body">
                     <p class="font-weight-bold h3">{{ $user->specialty->title ?? '-' }}</p>
 
-                    <div class="row p-1">
+                    <div class="row p-1 pl-3">
+                        @if (!empty($user->specialty->detail))
                         {!! $user->specialty->detail !!}
+                        @else
+                        <span class="font-weight-bold text-danger">{{ $user->fname . ' ' . $user->lname }} specialty is
+                            not stated
+                            yet!</span>
+                        @endif
                     </div>
                 </div>
             </div>
@@ -49,7 +55,7 @@
                         <div class="col-md-12">
                             <input id="student_reason" name="student_reason" placeholder="Your reason"
                                 class="form-control  @error('student_reason') is-invalid @enderror" type="text"
-                                autocomplete="text">
+                                autocomplete="text" value="{{ old('student_reason') }}">
                             @error('student_reason')
                             <span class="invalid-feedback" role="alert">
                                 <strong>{{ $message }}</strong>
@@ -63,7 +69,7 @@
                         <div class="col-md-12">
                             <input id="student_date" name="student_date" placeholder="Enter your available date"
                                 class="form-control  @error('student_date') is-invalid @enderror" type="date"
-                                autocomplete="text">
+                                autocomplete="text" value="{{ old('student_date') }}">
                             @error('student_date')
                             <span class="invalid-feedback" role="alert">
                                 <strong>{{ $message }}</strong>

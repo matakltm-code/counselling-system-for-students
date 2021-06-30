@@ -12,7 +12,12 @@
                 <div class="card-body pb-2">
                     <p class="b">
                         <small>Conselor Specialty</small> <br>
-                        <span class="font-weight-bold">{{ $user->specialty->title ?? '-' }}</span>
+                        @if (!empty($user->specialty->title))
+                        <span class="font-weight-bold">{{ $user->specialty->title }}</span>
+                        @else
+                        <span class="font-weight-bold text-danger">This counselor specialty is not stated
+                            yet!</span>
+                        @endif
                     </p>
                     <p class="pb-0 mb-0">Email: {{ $user->email }}, Last login:
                         {{ \Carbon\Carbon::parse($user->last_login_at)->diffForHumans() }}</p>
