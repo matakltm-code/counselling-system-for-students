@@ -44,17 +44,17 @@
                     <ul class="navbar-nav ml-auto">
                         <!-- Authentication Links -->
                         @guest
-                        @if (Route::has('login'))
+                        {{-- @if (Route::has('login')) --}}
                         <li class="nav-item">
                             <a class="nav-link" href="{{ route('login') }}">{{ __('Login') }}</a>
                         </li>
-                        @endif
+                        {{-- @endif --}}
 
-                        @if (Route::has('register') && env('STUDENTS_CAN_CREATE_THEIR_ACCOUNT'))
+                        {{-- @if (Route::has('register') && env('STUDENTS_CAN_CREATE_THEIR_ACCOUNT')) --}}
                         <li class="nav-item">
                             <a class="nav-link" href="{{ route('register') }}">{{ __('Register') }}</a>
                         </li>
-                        @endif
+                        {{-- @endif --}}
                         @else
 
                         {{-- Check if the user is admin --}}

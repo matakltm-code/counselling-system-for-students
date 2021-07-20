@@ -119,7 +119,7 @@ Route::post('/counselors/send-counselling-request', function (Request $request) 
     $data = $request->validate([
         'counselor_id' => 'required|integer',
         'student_reason' => 'required|string|max:500',
-        'student_date' => 'required|date|after:now',
+        'student_date' => 'required|date',
     ]);
     // Add request to database
     Appointment::create([

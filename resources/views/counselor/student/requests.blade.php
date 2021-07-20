@@ -57,10 +57,12 @@
             </div>
             @else
             @if (empty(auth()->user->specialty->detail))
+            {{-- @if (dd(auth()->user->specialty->detail) != '') --}}
             <div class="alert alert-danger text-center" role="alert">
                 <p class="display-4">Please finsh your counsellig specialty profile <br> <a
                         href="/profile/edit/specialty" class="btn btn-sm btn-link">Click Here</a></p>
             </div>
+            {{-- @endif --}}
             @endif
             <div class="alert alert-danger" role="alert">
                 <p class="pt-2 font-weight-bold">There is no any requests yet!</p>
