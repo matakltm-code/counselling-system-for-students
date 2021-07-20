@@ -60,12 +60,18 @@
                         {{-- Check if the user is admin --}}
                         @if (auth()->user()->is_admin)
                         <li class="nav-item <?=(Route::current()->uri() == 'account' ? 'active':'')?>">
-                            <a class="nav-link" href="/account">{{ __('Account Management') }}</a>
+                            <a class="nav-link" href="/files">{{ __('File Share') }}</a>
+                        </li>
+                        <li class="nav-item <?=(Route::current()->uri() == 'account' ? 'active':'')?>">
+                            <a class="nav-link" href="/account">{{ __('Create Account') }}</a>
                         </li>
                         <li class="nav-item <?=(Route::current()->uri() == 'account/login-history' ? 'active':'')?>">
                             <a class="nav-link" href="/account/login-history">{{ __('Login History') }}</a>
                         </li>
                         @elseif (auth()->user()->is_counselor)
+                        <li class="nav-item <?=(Route::current()->uri() == 'account' ? 'active':'')?>">
+                            <a class="nav-link" href="/files">{{ __('Shared Files') }}</a>
+                        </li>
                         <li class="nav-item <?=(Route::current()->uri() == 'counselling-requests' ? 'active':'')?>">
                             <a class="nav-link" href="/counselling-requests">{{ __('Counselling Requests') }}</a>
                         </li>
@@ -106,10 +112,14 @@
             </div>
         </nav>
 
-        <main class="py-4">
-            @include('inc.messages')
-            @yield('content')
-        </main>
+        @if(url()->current() === 'http://counselling-system-for-students.test')
+        <main class="pb-4">
+            @else
+            <main class="py-4">
+                @endif
+                @include('inc.messages')
+                @yield('content')
+            </main>
     </div>
     {{-- CKeditor files --}}
     <script src="/ckeditor5/ckeditor.js"></script>

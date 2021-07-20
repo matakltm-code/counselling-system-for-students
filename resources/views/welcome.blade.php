@@ -1,6 +1,9 @@
 @extends('layouts.app')
 
 @section('content')
+<div class="container-fluid p-0 m-0">
+    @include('inc.slide')
+</div>
 <div class="container">
     <div class="row justify-content-center">
         <div class="col-md-12">

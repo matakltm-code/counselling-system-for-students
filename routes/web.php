@@ -4,6 +4,7 @@ use App\Http\Controllers\AccountController;
 use App\Http\Controllers\AppointmentController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\ChangePasswordController;
+use App\Http\Controllers\FileController;
 use App\Models\Appointment;
 use App\Models\User;
 use Illuminate\Http\Request;
@@ -40,6 +41,12 @@ Route::patch('/profile/{profile}/specialty', [ProfileController::class, 'update_
 // Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
 // Admin Route
+Route::get('/files', [FileController::class, 'index']);
+Route::get('/files/create', [FileController::class, 'create']);
+Route::post('/files', [FileController::class, 'store']);
+Route::get('/files/{file}', [FileController::class, 'show']);
+Route::delete('/files/{file}', [FileController::class, 'destroy']);
+
 Route::get('/account', [AccountController::class, 'index']);
 Route::post('/account', [AccountController::class, 'store']);
 Route::get('/account/login-history', [AccountController::class, 'login_history']);
